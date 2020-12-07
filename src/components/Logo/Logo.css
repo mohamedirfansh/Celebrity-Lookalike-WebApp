@@ -1,5 +1,14 @@
 .Tilt {
     background: lightseagreen;
+    height: 100px; 
+    width: 100px;
+}
+
+@media screen and (max-width: 600px){
+    .Tilt {
+        height: 50px;
+        width: 50px;
+    }
 }
 
 .logo-div {

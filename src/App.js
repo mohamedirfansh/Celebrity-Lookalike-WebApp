@@ -1,5 +1,5 @@
 import './App.css';
-import tachyons from 'tachyons';
+import 'tachyons';
 import Particles from 'react-tsparticles';
 import particles from './assets/particles.json'
 import Navigation from './components/Navigation/Navigation';
@@ -8,7 +8,6 @@ import ImageLinkForm from './components/ImageLinkForm/ImageLinkForm';
 import Rank from './components/Rank/Rank';
 import Title from './components/Title/Title';
 
-//const particleOptions = JSON.parse(particles);
 
 function App() {
   return (
