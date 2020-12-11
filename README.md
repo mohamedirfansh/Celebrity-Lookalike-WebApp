@@ -1,2 +1,2 @@
-# Face Detection Web App
+# Celebrity Look-alike Web App
 > Coming soon...
