@@ -12,3 +12,7 @@
 .gr {
     background-color: #28a745;
 }
+
+.capitalize {
+    text-transform: capitalize;
+}

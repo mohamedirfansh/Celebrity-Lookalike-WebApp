@@ -26,7 +26,9 @@ class App extends React.Component {
       imageUrl: '',
       box: {},
       route: 'signin',
-      isSignedIn: false
+      isSignedIn: false,
+      lookalike: '',
+      confidence: ''
     }
   }
 
@@ -43,6 +45,11 @@ class App extends React.Component {
     }
   }
 
+  findLookALike = (data) => {
+    this.setState({lookalike: data.outputs[0].data.regions[0].data.concepts[0].name});
+    this.setState({confidence: data.outputs[0].data.regions[0].data.concepts[0].value});
+  }
+
   displayFaceBox = (box) => {
     this.setState({box: box})
   }
@@ -54,8 +61,11 @@ class App extends React.Component {
   onButtonSubmit = () => {
     this.setState({imageUrl: this.state.input})
 
-    app.models.predict(Clarifai.FACE_DETECT_MODEL, this.state.input)
-    .then(response => this.displayFaceBox(this.calculateFaceLocation(response)))
+    app.models.predict(Clarifai.CELEBRITY_MODEL, this.state.input)
+    .then(response => {
+      this.findLookALike(response);
+      this.displayFaceBox(this.calculateFaceLocation(response));
+    })
     .catch(err => console.log(err));
   }
 
@@ -69,13 +79,14 @@ class App extends React.Component {
   }
 
   render() {
-    const {isSignedIn, imageUrl, route, box} = this.state;
+    const {isSignedIn, imageUrl, route, box, lookalike, confidence} = this.state;
     let page;
     if (route === 'home'){
       page = <div>
               <Logo />
               <Rank />
-              <ImageLinkForm onInputChange={this.onInputChange} onButtonSubmit={this.onButtonSubmit}/>
+              <ImageLinkForm onInputChange={this.onInputChange} onButtonSubmit={this.onButtonSubmit} 
+              lookalike={lookalike} confidence={confidence}/>
               <FaceRecognition box={box} imageUrl={imageUrl}/>
             </div>
     } else if (route === 'signin') {

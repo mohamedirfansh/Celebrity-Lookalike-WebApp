@@ -1,11 +1,17 @@
 import React from 'react';
 import './ImageLinkForm.css'
 
-const ImageLinkForm = ({onInputChange, onButtonSubmit}) => {
+const ImageLinkForm = ({onInputChange, onButtonSubmit, lookalike, confidence}) => {
+    let num = confidence === '' ? 0 : confidence
     return(
         <div className='ma4 mt2'>
             <p className='white f3'>
-                {'Enter your image url and the app will detect faces in the image.'}
+                {'Enter your image url and the app will find your celebrity lookalike.'}
+            </p>
+            <p className='white f3'>
+                {'You look most like: '}<span className='underline capitalize'>{lookalike}</span>
+                <br />
+                {'With a confidence score of: ' + (parseFloat(num) * 100).toFixed(2) + '%'}
             </p>
             <div className='center'>
                 <div className='form center pa4 br3 shadow-5'>

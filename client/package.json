@@ -1,5 +1,5 @@
 {
-  "name": "face-detection-webapp",
+  "name": "celebrity-lookalike-client",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
