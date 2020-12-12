@@ -1,2 +1,2 @@
-# Celebrity Look-alike Web App
+# Celebrity Lookalike Web App
 > Coming soon...
