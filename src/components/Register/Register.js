@@ -26,7 +26,7 @@ class Register extends React.Component {
     onSubmitRegister = () => {
         fetch('http://localhost:3000/register', {
             method: 'post',
-            header: {'Content-Type': 'application/json'},
+            headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
                 email: this.state.email,
                 password: this.state.password,
@@ -35,7 +35,7 @@ class Register extends React.Component {
         })
         .then(response => response.json())
         .then(user => {
-            if (user) {
+            if (user.name) {
                 this.props.loadUser(user)
                 this.props.onRouteChange('home');
             }
@@ -79,7 +79,7 @@ class Register extends React.Component {
                             type="submit" value="Register" />
                         </div>
                         <div className="lh-copy mt3">
-                            <p onClick={() => onRouteChange('signin')} className="register f6 link dim white db">Sign In instead</p>
+                            <p onClick={() => this.props.onRouteChange('signin')} className="register f6 link dim white db">Sign In instead</p>
                         </div>
                     </div>
                 </main>

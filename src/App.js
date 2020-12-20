@@ -80,6 +80,19 @@ class App extends React.Component {
 
     app.models.predict(Clarifai.CELEBRITY_MODEL, this.state.input)
     .then(response => {
+      if (response) {
+        fetch('http://localhost:3000/image', {
+          method: 'put',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({
+            id: this.state.user.id
+          })
+        })
+        .then(response => response.json())
+        .then(count => {
+          this.setState({user: {...this.state.user, entries: count}})
+        })
+      }
       this.findLookALike(response);
       this.displayFaceBox(this.calculateFaceLocation(response));
     })
@@ -97,11 +110,12 @@ class App extends React.Component {
 
   render() {
     const {isSignedIn, imageUrl, route, box, lookalike, confidence} = this.state;
+    const {name, entries} = this.state.user;
     let page;
     if (route === 'home'){
       page = <div>
               <Logo />
-              <Rank />
+              <Rank name={name} entries={entries}/>
               <ImageLinkForm onInputChange={this.onInputChange} onButtonSubmit={this.onButtonSubmit} 
               lookalike={lookalike} confidence={confidence}/>
               <FaceRecognition box={box} imageUrl={imageUrl}/>
@@ -109,12 +123,12 @@ class App extends React.Component {
     } else if (route === 'signin') {
       page = <div>
               <Title />
-              <Signin onRouteChange={this.onRouteChange}/>
+              <Signin loadUser={this.loadUser} onRouteChange={this.onRouteChange}/>
             </div>
     } else if (route === 'signout') {
       page = <div>
               <Title />
-              <Signin onRouteChange={this.onRouteChange}/>
+              <Signin loadUser={this.loadUser} onRouteChange={this.onRouteChange}/>
             </div>
     } else {
       page = <div>

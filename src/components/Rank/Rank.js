@@ -1,13 +1,13 @@
 import React from 'react';
 
-const Rank = () => {
+const Rank = ({name, entries}) => {
     return(
         <div>
             <div className='white f3'>
-                {'Your current rank is '}
+                <span className='capitalize b'>{name}</span>{' you have submitted this number of pictures:'}
             </div>
             <div className='white f1'>
-                {'# 1'}
+                {entries}
             </div>
         </div>
     );
