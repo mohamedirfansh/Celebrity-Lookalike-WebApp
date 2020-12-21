@@ -7,7 +7,8 @@ class Register extends React.Component {
         this.state = {
             email: '',
             password: '',
-            name: ''
+            name: '',
+            error: ''
         }
     }
 
@@ -24,23 +25,31 @@ class Register extends React.Component {
     }
 
     onSubmitRegister = () => {
-        fetch('http://localhost:3000/register', {
-            method: 'post',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({
-                email: this.state.email,
-                password: this.state.password,
-                name: this.state.name
+        if (this.state.email !== '' ||
+            this.state.password !== '' ||
+            this.state.name !== '') {
+            fetch('http://localhost:3000/register', {
+                method: 'post',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    email: this.state.email,
+                    password: this.state.password,
+                    name: this.state.name
+                })
             })
-        })
-        .then(response => response.json())
-        .then(user => {
-            if (user.name) {
-                this.props.loadUser(user)
-                this.props.onRouteChange('home');
-            }
-        })
-
+            .then(response => response.json())
+            .then(user => {
+                if (user !== 'unsuccessful') {
+                    this.props.loadUser(user)
+                    this.props.onRouteChange('home');
+                } else {
+                    this.setState({error: 'Invalid username or password!'});
+                }
+            })
+        }
+        else {
+            this.setState({error: 'Invalid username or password!'});
+        }
     }
 
     render() {
@@ -81,10 +90,12 @@ class Register extends React.Component {
                         <div className="lh-copy mt3">
                             <p onClick={() => this.props.onRouteChange('signin')} className="register f6 link dim white db">Sign In instead</p>
                         </div>
+                        <div>
+                            <p className='err'>{this.state.error}</p>
+                        </div>
                     </div>
                 </main>
             </article>
-
         );
     }
 }

@@ -18,10 +18,6 @@ class Signin extends React.Component {
         this.setState({signInPassword: event.target.value})
     }
 
-    invalidCreds = () => {
-        this.setState({error: 'Invalid username or password'})
-    }
-
     onSubmitSignIn = () => {
         fetch('http://localhost:3000/signin', {
             method: 'post',
@@ -33,12 +29,12 @@ class Signin extends React.Component {
         })
         .then(response => response.json())
         .then(user => {
-            if (user.name !== '') {
+            if (user !== 'unsuccessful') {
                 this.props.loadUser(user);
                 this.props.onRouteChange('home');
             }
             else {
-                this.invalidCreds();
+                this.setState({error: 'Incorrect username or password!'});
             }
         })
     }
@@ -77,7 +73,6 @@ class Signin extends React.Component {
                     </div>
                 </main>
             </article>
-
         );
     }
 }
