@@ -13,3 +13,7 @@
 .card {
     color: #fff;
 }
+
+.err {
+    color: rgb(255, 66, 19);
+}

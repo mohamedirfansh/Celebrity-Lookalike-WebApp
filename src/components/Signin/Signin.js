@@ -6,7 +6,8 @@ class Signin extends React.Component {
         super(props);
         this.state = {
             signInEmail: '',
-            signInPassword: ''
+            signInPassword: '',
+            error: ''
         }
     }
     onEmailChange = (event) => {
@@ -15,6 +16,10 @@ class Signin extends React.Component {
 
     onPasswordChange = (event) => {
         this.setState({signInPassword: event.target.value})
+    }
+
+    invalidCreds = () => {
+        this.setState({error: 'Invalid username or password'})
     }
 
     onSubmitSignIn = () => {
@@ -28,9 +33,12 @@ class Signin extends React.Component {
         })
         .then(response => response.json())
         .then(user => {
-            if (user.id) {
+            if (user.name !== '') {
                 this.props.loadUser(user);
                 this.props.onRouteChange('home');
+            }
+            else {
+                this.invalidCreds();
             }
         })
     }
@@ -45,13 +53,13 @@ class Signin extends React.Component {
                         <div className="mt3">
                             <label className="db fw6 lh-copy f6" htmlFor="email-address">Email</label>
                             <input className="card pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" 
-                            type="email" name="email-address" id="email-address"
+                            type="email" name="email-address" id="email-address" required
                             onChange={this.onEmailChange} />
                         </div>
                         <div className="mv3">
                             <label className="db fw6 lh-copy f6" htmlFor="password">Password</label>
                             <input className="card b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" 
-                            type="password" name="password" id="password" 
+                            type="password" name="password" id="password" required
                             onChange={this.onPasswordChange}/>
                         </div>
                         </fieldset>
@@ -62,6 +70,9 @@ class Signin extends React.Component {
                         </div>
                         <div className="lh-copy mt3">
                             <p onClick={() => onRouteChange('register')} className="register f6 link dim white db">Register</p>
+                        </div>
+                        <div>
+                            <p className='err'>{this.state.error}</p>
                         </div>
                     </div>
                 </main>
