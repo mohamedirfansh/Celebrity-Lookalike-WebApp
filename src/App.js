@@ -11,7 +11,7 @@ import Title from './components/Title/Title';
 import FaceRecognition from './components/FaceRecognition/FaceRecognition';
 import Signin from './components/Signin/Signin';
 import Register from './components/Register/Register';
-
+import backendURL from './constants';
 
 const initialState = {
   input: '',
@@ -75,7 +75,7 @@ class App extends React.Component {
   onButtonSubmit = () => {
     this.setState({imageUrl: this.state.input})
 
-    fetch('http://localhost:3000/imageapi', {
+    fetch(backendURL + 'imageapi', {
       method: 'post',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({
@@ -85,7 +85,7 @@ class App extends React.Component {
     .then(resp => resp.json())
     .then(response => {
       if (response) {
-        fetch('http://localhost:3000/image', {
+        fetch(backendURL + 'image', {
           method: 'put',
           headers: {'Content-Type': 'application/json'},
           body: JSON.stringify({

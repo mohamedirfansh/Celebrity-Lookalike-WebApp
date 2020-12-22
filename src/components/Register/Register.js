@@ -1,5 +1,6 @@
 import React from 'react';
 import '../Signin/Signin.css';
+import backendURL from '../../constants';
 
 class Register extends React.Component {
     constructor(props) {
@@ -28,7 +29,7 @@ class Register extends React.Component {
         if (this.state.email !== '' &&
             this.state.password !== '' &&
             this.state.name !== '') {
-            fetch('http://localhost:3000/register', {
+            fetch(backendURL + 'register', {
                 method: 'post',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({
