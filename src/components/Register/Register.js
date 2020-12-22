@@ -58,28 +58,28 @@ class Register extends React.Component {
                 <main className="pa4 white signin">
                     <div className="measure">
                         <fieldset id="sign_up" className="ba b--transparent ph0 mh0">
-                        <legend className="f2 fw6 ph0 mh0">Register</legend>
-                        <div className="mt3">
-                            <label className="db fw6 lh-copy f6" htmlFor="name">Name</label>
-                            <input className="card pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" 
-                                type="text" name="name" id="name" required
-                                onChange={this.onNameChange} 
-                            />
-                        </div>
-                        <div className="mt3">
-                            <label className="db fw6 lh-copy f6" htmlFor="email-address">Email</label>
-                            <input className="card pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" 
-                                type="email" name="email-address" id="email-address" required
-                                onChange={this.onEmailChange}
-                            />
-                        </div>
-                        <div className="mv3">
-                            <label className="db fw6 lh-copy f6" htmlFor="password">Password</label>
-                            <input className="card b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" 
-                                type="password" name="password" id="password" required
-                                onChange={this.onPasswordChange}
-                            />
-                        </div>
+                            <legend className="f2 fw6 ph0 mh0">Register</legend>
+                            <div className="mt3">
+                                <label className="db fw6 lh-copy f6" htmlFor="name">Name</label>
+                                <input className="card pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" 
+                                    type="text" name="name" id="name" required
+                                    onChange={this.onNameChange} 
+                                />
+                            </div>
+                            <div className="mt3">
+                                <label className="db fw6 lh-copy f6" htmlFor="email-address">Email</label>
+                                <input className="card pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" 
+                                    type="email" name="email-address" id="email-address" required
+                                    onChange={this.onEmailChange}
+                                />
+                            </div>
+                            <div className="mv3">
+                                <label className="db fw6 lh-copy f6" htmlFor="password">Password</label>
+                                <input className="card b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" 
+                                    type="password" name="password" id="password" required
+                                    onChange={this.onPasswordChange}
+                                />
+                            </div>
                         </fieldset>
                         <div className="">
                             <input 

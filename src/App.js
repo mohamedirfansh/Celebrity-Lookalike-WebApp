@@ -1,7 +1,6 @@
 import React from 'react';
 import './App.css';
 import 'tachyons';
-import Clarifai from 'clarifai';
 import Particles from 'react-tsparticles';
 import particlesData from './assets/particles.json'
 import Navigation from './components/Navigation/Navigation';
@@ -13,10 +12,6 @@ import FaceRecognition from './components/FaceRecognition/FaceRecognition';
 import Signin from './components/Signin/Signin';
 import Register from './components/Register/Register';
 
-const api = process.env.REACT_APP_API_KEY;
-const app = new Clarifai.App({
-  apiKey: api
-});
 
 const initialState = {
   input: '',
@@ -80,7 +75,14 @@ class App extends React.Component {
   onButtonSubmit = () => {
     this.setState({imageUrl: this.state.input})
 
-    app.models.predict(Clarifai.CELEBRITY_MODEL, this.state.input)
+    fetch('http://localhost:3000/imageapi', {
+      method: 'post',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        input: this.state.input
+      })
+    })
+    .then(resp => resp.json())
     .then(response => {
       if (response) {
         fetch('http://localhost:3000/image', {
