@@ -25,8 +25,8 @@ class Register extends React.Component {
     }
 
     onSubmitRegister = () => {
-        if (this.state.email !== '' ||
-            this.state.password !== '' ||
+        if (this.state.email !== '' &&
+            this.state.password !== '' &&
             this.state.name !== '') {
             fetch('http://localhost:3000/register', {
                 method: 'post',
