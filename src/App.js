@@ -12,6 +12,7 @@ import FaceRecognition from './components/FaceRecognition/FaceRecognition';
 import Signin from './components/Signin/Signin';
 import Register from './components/Register/Register';
 import backendURL from './constants';
+import { trackPromise } from 'react-promise-tracker';
 
 const initialState = {
   input: '',
@@ -75,32 +76,34 @@ class App extends React.Component {
   onButtonSubmit = () => {
     this.setState({imageUrl: this.state.input})
 
-    fetch(backendURL + 'imageapi', {
-      method: 'post',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({
-        input: this.state.input
+    trackPromise(
+      fetch(backendURL + 'imageapi', {
+        method: 'post',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+          input: this.state.input
+        })
       })
-    })
-    .then(resp => resp.json())
-    .then(response => {
-      if (response) {
-        fetch(backendURL + 'image', {
-          method: 'put',
-          headers: {'Content-Type': 'application/json'},
-          body: JSON.stringify({
-            id: this.state.user.id
+      .then(resp => resp.json())
+      .then(response => {
+        if (response) {
+          fetch(backendURL + 'image', {
+            method: 'put',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+              id: this.state.user.id
+            })
           })
-        })
-        .then(response => response.json())
-        .then(count => {
-          this.setState({user: {...this.state.user, entries: count}})
-        })
-      }
-      this.findLookALike(response);
-      this.displayFaceBox(this.calculateFaceLocation(response));
-    })
-    .catch(err => console.log(err));
+          .then(response => response.json())
+          .then(count => {
+            this.setState({user: {...this.state.user, entries: count}})
+          })
+        }
+        this.findLookALike(response);
+        this.displayFaceBox(this.calculateFaceLocation(response));
+      })
+      .catch(err => console.log(err))
+    );
   }
 
   onRouteChange = (route) => {
