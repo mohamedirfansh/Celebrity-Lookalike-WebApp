@@ -1,6 +1,7 @@
 import React from 'react';
 import '../Signin/Signin.css';
 import backendURL from '../../constants';
+import { trackPromise } from 'react-promise-tracker';
 
 class Register extends React.Component {
     constructor(props) {
@@ -29,24 +30,26 @@ class Register extends React.Component {
         if (this.state.email !== '' &&
             this.state.password !== '' &&
             this.state.name !== '') {
-            fetch(backendURL + 'register', {
-                method: 'post',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({
-                    email: this.state.email,
-                    password: this.state.password,
-                    name: this.state.name
+            trackPromise(
+                fetch(backendURL + 'register', {
+                    method: 'post',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({
+                        email: this.state.email,
+                        password: this.state.password,
+                        name: this.state.name
+                    })
                 })
-            })
-            .then(response => response.json())
-            .then(user => {
-                if (user !== 'unsuccessful') {
-                    this.props.loadUser(user)
-                    this.props.onRouteChange('home');
-                } else {
-                    this.setState({error: 'Invalid username or password!'});
-                }
-            })
+                .then(response => response.json())
+                .then(user => {
+                    if (user !== 'unsuccessful') {
+                        this.props.loadUser(user)
+                        this.props.onRouteChange('home');
+                    } else {
+                        this.setState({error: 'Invalid username or password!'});
+                    }
+                })
+            ) 
         }
         else {
             this.setState({error: 'Invalid username or password!'});

@@ -37,6 +37,13 @@ class App extends React.Component {
     this.state = initialState;
   }
 
+  componentDidMount(){
+    trackPromise(
+      fetch(backendURL)
+      .then(response => response.json())
+    )
+  }
+
   loadUser = (data) => {
     this.setState({user: {
       id: data.id,
