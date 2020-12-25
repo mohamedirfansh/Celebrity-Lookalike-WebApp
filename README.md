@@ -1,9 +1,10 @@
 # Celebrity Lookalike Web App
 
-# Overview
+## Overview
 Have you ever wondered which famous celebrity you look like the most? Well, this app will help you find just that! Simply give it a URL to an image of yourself and let the app find your closest celebrity lookalike. It even gives you a confidence score! Try it out [here](https://mohamedirfansh.github.io/Celebrity-Lookalike-WebApp/)!
 
 Simply sign up for a free account and submit a URL to an image of yourself to find you celebrity lookalike!
+
 ![Cover](cover.png)
 
 ## Getting Started
@@ -13,7 +14,7 @@ To get a copy of the project up and running on your local machine, ensure that y
 
 - Node.js (v12.18.3 or newer although older versions should still work)
 - NPM (v6.14.6 or newer although older versions should still work)
-- PostgreSQL (v13.1 or newer)
+- PostgreSQL (v13.1 or newer although older versions should still work)
 
 ### Installing and running
 Clone this repo with:
