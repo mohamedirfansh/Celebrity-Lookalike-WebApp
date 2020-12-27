@@ -46,4 +46,4 @@ npm run
 - [Express](https://expressjs.com/)
 - [PostgreSQL](https://www.postgresql.org/)
 ---
-> This project was built and submitted for the MLH Holiday Hacks 2020. View submission [here](https://devpost.com/software/celebrity-lookalike).
+> This project was built and submitted for the MLH Holiday Hacks 2020.
