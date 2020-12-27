@@ -40,8 +40,10 @@ npm install
 npm run
 ```
 
-## Build With
+## Built With
 - [React](https://reactjs.org/)
 - [Node.js](https://nodejs.org/)
 - [Express](https://expressjs.com/)
 - [PostgreSQL](https://www.postgresql.org/)
+---
+> This project was built and submitted for the MLH Holiday Hacks 2020. View submission [here](https://devpost.com/software/celebrity-lookalike).
