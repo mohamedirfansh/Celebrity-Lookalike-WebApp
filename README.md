@@ -45,5 +45,3 @@ npm run
 - [Node.js](https://nodejs.org/)
 - [Express](https://expressjs.com/)
 - [PostgreSQL](https://www.postgresql.org/)
----
-> This project was submitted for the MLH Holiday Hacks 2020.
